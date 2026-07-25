@@ -1,0 +1,68 @@
+Largest in Array
+Solved
+Difficulty: BasicAccuracy: 67.48%Submissions: 639K+Points: 1Average Time: 20m
+Given an array arr[]. The task is to find the largest element and return it.
+
+Examples:
+
+Input: arr[] = [1, 8, 7, 56, 90]
+Output: 90
+Explanation: The largest element of the given array is 90.
+
+
+class Solution {
+    public int largest(List<int> arr) {
+        // code here.
+        int maxValue = int.MinValue;
+        foreach(int num in arr){
+            if(maxValue<num){
+                maxValue = num;
+            }
+        }
+        
+        return maxValue;
+        
+    }
+}
+Overall Time Complexity: O(n)
+Space Complexity = O(1)
+
+Approach 2: Sort the Array
+arr.Sort();
+
+return arr[arr.Count - 1];
+Complexity
+Time: O(n log n)
+Space: Depends on the sorting algorithm
+
+❌ Worse than the linear scan because sorting does extra work when you only need the maximum.
+
+Approach 3: LINQ
+return arr.Max();
+Complexity
+Time: O(n)
+Space: O(1)
+
+This is concise, but in an interview, it's often better to implement the logic yourself unless the interviewer explicitly allows library methods.
+
+Interview Follow-up
+
+An interviewer might ask:
+
+Can you do it in O(log n)?
+
+Answer
+For an unsorted array: No. You must inspect every element, so O(n) is the best possible.
+For a sorted array: Yes. The largest element is at the end.
+return arr[arr.Count - 1];
+
+This access is O(1) because no traversal is needed.
+
+
+
+
+
+
+
+
+
