@@ -227,6 +227,80 @@ class Solution {
 | Space Complexity | **O(1)**   |
 
 
+Check Sorted Array
+Solved
+Difficulty: EasyAccuracy: 39.37%Submissions: 428K+Points: 2Average Time: 15m
+Given an array arr[], check whether it is sorted in non-decreasing order. Return true if it is sorted otherwise false.
+
+Examples:
+
+Input: arr[] = [10, 20, 30, 40, 50]
+Output: true
+Explanation: The given array is sorted.
+Input: arr[] = [90, 80, 100, 70, 40, 30]
+Output: false
+Explanation: The given array is not sorted.
+Constraints:
+1 ≤ arr.size ≤ 106
+- 109 ≤ arr[i] ≤ 109
+
+
+class Solution
+{
+    public bool isSorted(int[] arr)
+    {
+        for (int i = 1; i < arr.Length; i++)
+        {
+            if (arr[i] < arr[i - 1])
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+}
+
+Time Complexity = O(n)
+Space Complexity = O(1)
+
+
+Remove Duplicates Sorted Array
+Solved
+Difficulty: EasyAccuracy: 38.18%Submissions: 391K+Points: 2Average Time: 20m
+You are given a sorted array arr[] containing positive integers. Your task is to remove all duplicate elements from this array such that each element appears only once. Return an array containing these distinct elements in the same order as they appeared.
+Examples :
+
+Input: arr[] = [2, 2, 2, 2, 2]
+Output: [2]
+Explanation: After removing all the duplicates only one instance of 2 will remain i.e. [2] so modified array will contains 2 at first position and you should return array containing [2] after modifying the array.
+Input: arr[] = [1, 2, 4]
+Output: [1, 2, 4]
+Explation:  As the array does not contain any duplicates so you should return [1, 2, 4].
+
+
+class Solution {
+    public List<int> removeDuplicates(int[] arr) {
+        // code here
+        List<int> list = new List<int>();
+        if(arr.Length != 0){
+            list.Add(arr[0]);
+        }
+        for(int i=1;i<arr.Length;i++){
+          if(arr[i]==arr[i-1]){
+              continue;
+          }
+          list.Add(arr[i]);
+        }
+        return list;
+    }
+}
+
+Time Complexity = O(n)
+
+Space Complexity = O(n)
+
+
 
 
 
