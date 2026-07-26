@@ -59,6 +59,172 @@ return arr[arr.Count - 1];
 This access is O(1) because no traversal is needed.
 
 
+First and Second Smallests
+Solved
+Difficulty: EasyAccuracy: 24.44%Submissions: 186K+Points: 2
+Given an array, arr[] of integers, your task is to return the smallest and second smallest element in the array. If the smallest and second smallest do not exist, return -1.
+
+Examples:
+
+Input: arr[] = [2, 4, 3, 5, 6]
+Output: [2, 3] 
+Explanation: 2 and 3 are respectively the smallest and second smallest elements in the array.
+
+
+Approach 1 brute force Sollution
+class Solution {
+    public List<int> minAnd2ndMin(int[] arr) {
+        // code here
+        arr.Sort();
+        List<int> li = new List<int>();
+        li.Add(arr[0]);
+        li.Add(arr[1]);
+        return li;
+    }
+}
+TC o(nLogn)
+SC O(n)
+
+
+
+
+class Solution {
+    public List<int> minAnd2ndMin(int[] arr) {
+        // code here
+       int firstmin;
+       int secmin = int.MaxValue;
+       if(arr.Length == 0 ){
+           return new List<int>(){-1};
+       }
+       firstmin = arr[0];
+       for(int i = 1; i<arr.Length;i++){
+           if(arr[i]<secmin && arr[i]<firstmin){
+               secmin = firstmin;
+               firstmin = arr[i];
+           }
+           else if(arr[i]>firstmin && arr[i]<secmin){
+               secmin = arr[i];
+           }
+       }
+    if(secmin == int.MaxValue){
+         return new List<int>(){-1};
+    }
+    return  new List<int>(){firstmin,secmin};
+    
+    }
+}
+ TC o(n)
+SC o(n)
+
+
+Best Code cleaner apporach 
+
+class Solution
+{
+    public List<int> minAnd2ndMin(int[] arr)
+    {
+        int firstMin = int.MaxValue;
+        int secondMin = int.MaxValue;
+
+        foreach (int num in arr)
+        {
+            if (num < firstMin)
+            {
+                secondMin = firstMin;
+                firstMin = num;
+            }
+            else if (num > firstMin && num < secondMin)
+            {
+                secondMin = num;
+            }
+        }
+
+        if (secondMin == int.MaxValue)
+        {
+            return new List<int> { -1 };
+        }
+
+        return new List<int> { firstMin, secondMin };
+    }
+}
+
+
+Second Largest
+Solved
+Difficulty: EasyAccuracy: 26.72%Submissions: 1.6MPoints: 2Average Time: 15m
+Given an array of positive integers arr[], return the second largest element from the array. If the second largest element doesn't exist then return -1.
+
+Note: The second largest element should not be equal to the largest element.
+
+Examples:
+
+Input: arr[] = [12, 35, 1, 10, 34, 1]
+Output: 34
+Explanation: The largest element of the array is 35 and the second largest element is 34.
+Input: arr[] = [10, 5, 10]
+Output: 5
+Explanation: The largest element of the array is 10 and the second largest element is 5.
+
+
+class Solution {
+    public int getSecondLargest(int[] arr) {
+        // code here
+        int firstMax = int.MinValue;
+        int secondMax= int.MinValue;
+        foreach(int num in arr){
+            if(num>firstMax){
+                secondMax = firstMax;
+                firstMax = num;
+            }
+            else if(num<firstMax && num>secondMax){
+                secondMax = num;
+            }
+        }
+        if(secondMax == int.MinValue){
+            return -1;
+        }
+        return secondMax;
+    }
+}
+
+TC O(n)
+SC o(1)
+
+
+Reverse an Array
+Solved
+Difficulty: EasyAccuracy: 55.32%Submissions: 322K+Points: 2Average Time: 5m
+You are given an array of integers arr[]. You have to reverse the given array.
+
+Note: Modify the array in place.
+
+Examples:
+
+Input: arr = [1, 4, 3, 2, 6, 5]
+Output: [5, 6, 2, 3, 4, 1]
+Explanation: The elements of the array are [1, 4, 3, 2, 6, 5]. After reversing the array, the first element goes to the last position, the second element goes to the second last position and so on. Hence, the answer is [5, 6, 2, 3, 4, 1].
+Input: arr = [4, 5, 2]
+Output: [2, 5, 4]
+Explanation: The elements of the array are [4, 5, 2]. The reversed array will be [2, 5, 4].
+
+class Solution {
+    public void reverseArray(int[] arr) {
+        // code here
+        int i=0;
+        int j=arr.Length-1;
+        while(i<j){
+            int temp=arr[i];
+            arr[i]=arr[j];
+            arr[j]=temp;
+            i++;
+            j--;
+        }
+    }
+}
+| Metric           | Complexity |
+| ---------------- | ---------- |
+| Time Complexity  | **O(n)**   |
+| Space Complexity | **O(1)**   |
 
 
 
