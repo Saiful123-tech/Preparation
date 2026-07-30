@@ -38,7 +38,12 @@ class Solution {
     }
 }
 
+
+
 TC O(logn)
 SC o(1)
-
+mid = 20 + (30 - 20) / 2
+    = 20 + 10 / 2
+    = 20 + 5
+    = 25
 TC 
