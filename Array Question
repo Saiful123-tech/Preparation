@@ -623,6 +623,40 @@ TC o(n)
 SC o(1)
 
 
+public class Solution {
+    public int[] TwoSum(int[] nums, int target) {
+    int left = 0;
+    int right = nums.Length-1;
+    var listpaired = new List<KeyValuePair<int, int>>();
+
+    int[] paired = new int[2];
+    for(int i=0;i<nums.Length;i++){
+        listpaired.Add(new KeyValuePair<int, int>(nums[i],i));
+    }
+    var sorted = listpaired.OrderBy(x => x.Key).ToList();
+    while(left<right){
+        if(sorted[left].Key + sorted[right].Key== target){
+             paired[0] = sorted[left].Value;
+             paired[1] = sorted[right].Value;
+             break;
+        }
+        else if(sorted[left].Key + sorted[right].Key>target){
+            right--;
+        }
+        else{
+            left++;
+        }
+    }
+    return paired;
+    }
+}
+
+TC o(nlogn)
+SC o(n)
+
+
+
+
 
 
 
