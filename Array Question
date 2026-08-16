@@ -945,6 +945,51 @@ public class Solution {
 TC ; O(m+n)
 SC : o(m+n)
 
+Best Approach gap Algorithm
+
+public class Solution
+{
+    public void Merge(int[] nums1, int m, int[] nums2, int n)
+    {
+        // Put nums2 into the empty space of nums1
+        for (int i = 0; i < n; i++)
+        {
+            nums1[m + i] = nums2[i];
+        }
+
+        int length = m + n;
+        int gap = (length + 1) / 2;
+
+        while (gap > 0)
+        {
+            int i = 0;
+            int j = i + gap;
+
+            while (j < length)
+            {
+                if (nums1[i] > nums1[j])
+                {
+                    int temp = nums1[i];
+                    nums1[i] = nums1[j];
+                    nums1[j] = temp;
+                }
+
+                i++;
+                j++;
+            }
+
+            if (gap == 1)
+                break;
+
+            gap = (gap + 1) / 2;
+        }
+    }
+}
+
+TC o(m+n(log(m+n)))
+SC o(1)
+
+
 
 
 
