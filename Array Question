@@ -1250,8 +1250,35 @@ public class Solution {
 
     }
 }
-TC: o(n)
+TC: o(2n)
 SC: o(n)
+
+Optimal Approach
+
+public class Solution {
+    public int[] RearrangeArray(int[] nums) {
+       int[] res = new int[nums.Length];
+       int p =0;
+       int n = 1;
+       if(nums.Length==0 || nums.Length==1){
+        return nums;
+       }
+       for(int i=0;i<nums.Length;i++){
+         if(nums[i]<0){
+            res[n] = nums[i];
+            n = n + 2;
+         }
+         else{
+             res[p] = nums[i];
+            p = p + 2;
+         }
+       } 
+      return res;
+    }
+}
+
+TC: o(n)
+SC: o(1)
 
 
 
