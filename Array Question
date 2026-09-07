@@ -1499,6 +1499,39 @@ public class Solution {
     }
 }
 
+TC: o(2n)
+SC: o(1)
+
+Optimal Approach (Dutch National Algorithm)
+
+
+public class Solution {
+    public void Swap(int l,int r,int[] nums){
+        int temp = nums[l];
+        nums[l] = nums[r];
+        nums[r] = temp;
+    }
+    public void SortColors(int[] nums) {
+       int low = 0;
+       int mid = 0;
+       int high = nums.Length -1 ;
+       while(mid<=high){
+        if(nums[mid]==0){
+          Swap(low,mid,nums);
+          low++;
+        mid++;
+        }
+        else if(nums[mid]==1){
+            mid++;
+        }
+        else{
+            Swap(mid,high,nums);
+            high--;
+        }
+       }
+    }
+}
+
 TC: o(n)
 SC: o(1)
 
