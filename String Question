@@ -230,3 +230,103 @@ SC: o(n)
         Array.Reverse(words);
 
         return string.Join(" ", words);
+
+
+125. Valid Palindrome
+Solved
+Easy
+Topics
+premium lock iconCompanies
+
+A phrase is a palindrome if, after converting all uppercase letters into lowercase letters and removing all non-alphanumeric characters, it reads the same forward and backward. Alphanumeric characters include letters and numbers.
+
+Given a string s, return true if it is a palindrome, or false otherwise.
+
+ 
+
+Example 1:
+
+Input: s = "A man, a plan, a canal: Panama"
+Output: true
+Explanation: "amanaplanacanalpanama" is a palindrome.
+
+Example 2:
+
+Input: s = "race a car"
+Output: false
+Explanation: "raceacar" is not a palindrome.
+
+Example 3:
+
+Input: s = " "
+Output: true
+Explanation: s is an empty string "" after removing non-alphanumeric characters.
+Since an empty string reads the same forward and backward, it is a palindrome.
+
+ 
+
+Constraints:
+
+    1 <= s.length <= 2 * 105
+    s consists only of printable ASCII characters.
+
+
+
+Approach 1 
+
+public class Solution {
+    public bool IsPalindrome(string s) {
+        int i =0;
+        int j = s.Length-1;
+        while(i<j){
+            if(!(char.ToLower(s[i]) >= 'a'   && char.ToLower(s[i]) <= 'z') && !(char.ToLower(s[i]) >= '0'   && char.ToLower(s[i]) <= '9')){
+                i++;
+                continue;
+            }
+            else if(!(char.ToLower(s[j]) >= 'a'   && char.ToLower(s[j]) <= 'z') && !(char.ToLower(s[j]) >= '0'   && char.ToLower(s[j]) <= '9')){
+                j--;
+                continue;
+            }
+            else if(char.ToLower(s[i])!=char.ToLower(s[j])){
+            return false;
+            }
+            i++;
+            j--;
+        }
+        return true;
+    }
+}
+TC: o(n)
+SC: o(1)
+
+Best Cleaner Approach 2
+
+public class Solution {
+    public bool IsPalindrome(string s) {
+        int i = 0;
+        int j = s.Length - 1;
+
+        while (i < j) {
+            if (!char.IsLetterOrDigit(s[i])) {
+                i++;
+                continue;
+            }
+
+            if (!char.IsLetterOrDigit(s[j])) {
+                j--;
+                continue;
+            }
+
+            if (char.ToLower(s[i]) != char.ToLower(s[j])) {
+                return false;
+            }
+
+            i++;
+            j--;
+        }
+
+        return true;
+    }
+}
+TC: o(n)
+SC : o(1)
