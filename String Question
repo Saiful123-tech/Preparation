@@ -330,3 +330,97 @@ public class Solution {
 }
 TC: o(n)
 SC : o(1)
+
+
+242. Valid Anagram
+Solved
+Easy
+Topics
+premium lock iconCompanies
+
+Given two strings s and t, return true if t is an of s, and false otherwise.
+
+ 
+
+Example 1:
+
+Input: s = "anagram", t = "nagaram"
+
+Output: true
+
+Example 2:
+
+Input: s = "rat", t = "car"
+
+Output: false
+
+ 
+
+Constraints:
+
+    1 <= s.length, t.length <= 5 * 104
+    s and t consist of lowercase English letters.
+
+ 
+
+Follow up: What if the inputs contain Unicode characters? How would you adapt your solution to such a case?
+
+
+Approach 1
+public class Solution {
+    public bool IsAnagram(string s, string t) {
+        if(s.Length!=t.Length){
+            return false;
+        }
+        Dictionary<char,int> dict = new Dictionary<char,int>();
+        for(int i =0;i<s.Length;i++){
+            if(dict.ContainsKey(s[i])){
+            dict[s[i]]++;
+            continue;
+           }
+            dict[s[i]] = 1;
+        }
+
+        for(int j=0;j<t.Length;j++){
+           if(!dict.ContainsKey(t[j])){
+            return false;
+           }
+           dict[t[j]]--;
+        }
+        foreach(var item in dict){
+            if(item.Value!=0){
+                return false;
+            }
+        }
+        return true;
+    }
+}
+
+TC: o(n)
+SC: o(n)
+
+Optimal Approach 
+
+public class Solution {
+    public bool IsAnagram(string s, string t) {
+        if(s.Length!=t.Length){
+            return false;
+        }  
+        char[] arr = new char[26];
+        for(int i =0;i<s.Length;i++){
+           arr[s[i] - 'a']++;
+           arr[t[i] - 'a']--;
+        }
+
+        for(int j=0;j<26;j++){
+          if(arr[j]!=0){
+            return false;
+          }
+        }
+        return true;
+    }
+}
+
+TC: o(n)
+SC: o(26) -> o(1)
+
