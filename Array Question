@@ -1986,6 +1986,41 @@ TC : o(logn)
 SC: o(k)
 
 
+Approach 2
+
+public class Solution {
+    int Calculate(int n){
+        int sum = 0;
+
+            foreach (char c in n.ToString())
+            {
+                int digit = c - '0';
+                sum += digit * digit;
+            }
+            return sum;
+    }
+    public bool IsHappy(int n) {
+       int value = Calculate(n);
+       int fast = Calculate(value);
+       int slow = Calculate(n);
+      while(fast!=1){
+          value = Calculate(fast);
+        fast = Calculate(value);
+        slow = Calculate(slow);
+        if(slow==fast){
+            return false;
+        }
+      }
+      return true;
+
+      
+    }
+    
+}
+
+TC: Interview answer: TC = O(dlogn), SC = O(1).
+
+
 
 
 
