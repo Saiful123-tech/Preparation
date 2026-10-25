@@ -228,3 +228,34 @@ class Solution {
 }
 TC: o(n)
 SC: o(n)
+
+Approach 3 Optimal Two pointer shrink appproach
+
+class Solution {
+    public int longestSubarray(int[] arr, int k) {
+        // code here
+      int len = 0;
+      int sum = 0;
+      int i = 0;
+      int j =0;
+      while(i<arr.Length){
+         sum = sum + arr[i];
+         while (sum > k && j <= i)
+                    {
+                        sum -= arr[j];
+                        j++;
+                    }
+         if(sum==k){
+             int curLen = i - j + 1;
+             if(curLen>len){
+                 len = curLen;
+             }
+         }
+         i++;
+          
+      }
+      return len;
+    }
+}
+TC: o(n)
+SC: o(1)
