@@ -306,3 +306,154 @@ public class Solution {
 TC: o(n)
 SC: o(n)
 }
+
+438. Find All Anagrams in a String
+Attempted
+Medium
+Topics
+premium lock icon
+Companies
+Given two strings s and p, return an array of all the start indices of p's anagrams in s. You may return the answer in any order.
+
+ 
+
+Example 1:
+
+Input: s = "cbaebabacd", p = "abc"
+Output: [0,6]
+Explanation:
+The substring with start index = 0 is "cba", which is an anagram of "abc".
+The substring with start index = 6 is "bac", which is an anagram of "abc".
+Example 2:
+
+Input: s = "abab", p = "ab"
+Output: [0,1,2]
+Explanation:
+The substring with start index = 0 is "ab", which is an anagram of "ab".
+The substring with start index = 1 is "ba", which is an anagram of "ab".
+The substring with start index = 2 is "ab", which is an anagram of "ab".
+ 
+
+Constraints:
+
+1 <= s.length, p.length <= 3 * 104
+s and p consist of lowercase English letters.
+
+Approach1 Brute Force Approach
+public class Solution {
+    public bool FindMap(string pat,int i,int j,Dictionary<char,int> dict)
+    {
+        Dictionary<char,int> dict2 = new Dictionary<char,int>();
+        while(j<=i){
+            if(dict2.ContainsKey(pat[j])){
+                dict2[pat[j]]++;
+                j++;
+                continue;
+            }
+            dict2[pat[j]] = 1;
+            j++;
+        }
+        foreach(var item in dict2){
+            if(!dict.ContainsKey(item.Key)){
+                return false;
+            }
+            if(item.Value!=dict[item.Key]){
+                return false;
+            }
+        }
+        return true;
+    }
+    public IList<int> FindAnagrams(string s, string p) {
+        Dictionary<char,int> dict = new Dictionary<char,int>();
+        if(s.Length<p.Length){
+            return new List<int>();
+        }
+        for(int k=0;k<p.Length;k++){
+            if(dict.ContainsKey(p[k])){
+                dict[p[k]]++;
+                continue;
+            }
+            dict[p[k]] = 1;
+        }
+        int j= 0;
+        int i = p.Length-1;
+        IList<int> li = new List<int>();
+        while(i<s.Length){
+            if(FindMap(s,i,j,dict)){
+                li.Add(j);
+            }
+            i++;
+            j++;
+        }
+        return li;
+    }
+}
+TC: o(n- m + 1) * m)
+SC: o(n)
+  Approach 2   Better Approach 
+public class Solution {
+     private bool AreEqual(
+        Dictionary<char, int> dict1,
+        Dictionary<char, int> dict2)
+    {
+        if (dict1.Count != dict2.Count)
+            return false;
+
+        foreach (var item in dict1)
+        {
+            if (!dict2.ContainsKey(item.Key))
+                return false;
+
+            if (dict1[item.Key] != dict2[item.Key])
+                return false;
+        }
+
+        return true;
+    }
+    public IList<int> FindAnagrams(string s, string p) {
+        Dictionary<char,int> sdict = new Dictionary<char,int>();
+       Dictionary<char,int> pdict = new Dictionary<char,int>();
+
+        if(s.Length<p.Length){
+            return new List<int>();
+        }
+        for(int k=0;k<p.Length;k++){
+            if(pdict.ContainsKey(p[k])){
+                pdict[p[k]]++;
+                continue;
+            }
+            pdict[p[k]] = 1;
+        }
+        int left = 0;
+        int right = 0;
+        IList<int> li = new List<int>();
+        while(right<s.Length){
+            char incoming = s[right];
+            if(sdict.ContainsKey(incoming)){
+                sdict[incoming]++;
+            }
+            else{
+                 sdict[incoming] = 1;
+            }
+
+            if(right-left+1>p.Length){
+                char outgoing = s[left];
+                sdict[outgoing]--;
+                if(sdict[outgoing]==0){
+                    sdict.Remove(outgoing);
+                }
+                left++;
+            }
+
+            if(right-left + 1 == p.Length && AreEqual(pdict,sdict)){
+                      li.Add(left);
+            }
+            right++;
+        }
+        return li;
+    }
+}
+
+TC: o(n+m)
+SC:  o(k)
+
