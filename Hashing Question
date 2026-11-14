@@ -457,3 +457,50 @@ public class Solution {
 TC: o(n+m)
 SC:  o(k)
 
+
+Opltimized sollution (Sliding Window Freqiency
+
+public class Solution
+{
+    public IList<int> FindAnagrams(string s, string p)
+    {
+        List<int> result = new List<int>();
+
+        if (s.Length < p.Length)
+            return result;
+
+        int[] pCount = new int[26];
+        int[] sCount = new int[26];
+
+        // Build frequency of pattern
+        for (int i = 0; i < p.Length; i++)
+        {
+            pCount[p[i] - 'a']++;
+            sCount[s[i] - 'a']++;
+        }
+
+        // Check first window
+        if (pCount.SequenceEqual(sCount))
+            result.Add(0);
+
+        // Slide the window
+        for (int i = p.Length; i < s.Length; i++)
+        {
+            // Remove outgoing character
+            sCount[s[i - p.Length] - 'a']--;
+
+            // Add incoming character
+            sCount[s[i] - 'a']++;
+
+            // Compare frequencies
+            if (pCount.SequenceEqual(sCount))
+            {
+                result.Add(i - p.Length + 1);
+            }
+        }
+
+        return result;
+    }
+}
+TC: o(n+m)
+SC: o(1)
